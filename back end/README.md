@@ -32,7 +32,7 @@ The reasons to shorten a URL are the following:
 - URL expires after 30 days of not being use
 - Optional custom alias
 
-### Things to do
+### Things to do 
 - [x] Basic shortener algorithm
 - [ ] Front end integration
 - [ ] Redis for cache
