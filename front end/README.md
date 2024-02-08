@@ -1,7 +1,3 @@
-# OrienteSalud Facturas
-
-Altair Fornt end
-
-
-
-![Program screenshot](./screenshot.png)
+# Altair front end
+Altair Front end
+![Program screenshot](screenshot.png)
