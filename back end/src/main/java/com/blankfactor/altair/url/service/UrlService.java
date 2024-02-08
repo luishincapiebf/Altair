@@ -7,6 +7,7 @@ import com.google.common.hash.Hashing;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ public class UrlService {
     public Url getOriginalUrlByShortUrl(String shortUrl) {
         return this.urlRepository.findByShortUrl(shortUrl)
                 .orElseThrow(() -> new NotFoundException(String.format("'%s' not found", shortUrl)));
+
     }
 
     public Url findOrSaveShortUrl(String originalUrl) {
@@ -41,11 +43,13 @@ public class UrlService {
         } else {
             Url urlToSave = Url.builder()
                     .longUrl(originalUrl)
-                    .expiresAt("01-01-2023")
+                    .expiresAt(LocalDate.now()
+                            .plusMonths(1).toString())
                     .shortUrl(generateShortUrl(originalUrl))
                     .build();
             url = this.urlRepository.save(urlToSave);
         }
+
         return url;
     }
 

@@ -42,11 +42,11 @@ The reasons to shorten a URL are the following:
 - [ ] Testing :)
 - [ ] Cors configuration
 - [ ] Documentation
-- [ ] 
-
+- [ ] Testing again
+- [ ] Cloud
+ 
 ### DB Schema
 ![ER-Diagram.png](.github%2Fmedia%2FER-Diagram.png)
-
 
 
 ### References
@@ -57,37 +57,3 @@ https://systemdesign.one/url-shortening-system-design/#url-shortener-api
 https://medium.com/@pratimbhosale/building-a-url-shortener-using-go-and-sqlite-with-gorm-ab08c0bcc99c
 https://medium.com/@sandeep4.verma/system-design-scalable-url-shortener-service-like-tinyurl-106f30f23a82
 https://github.com/search?q=url+shortener++language%3AJava&type=repositories&l=Java
-
-## Development
-
-Update your local database connection in `application.yml` or create your own `application-local.yml` file to override
-settings for development.
-
-During development it is recommended to use the profile `local`. In IntelliJ `-Dspring.profiles.active=local` can be
-added in the VM options of the Run Configuration after enabling this property in "Modify options".
-
-Lombok must be supported by your IDE. For IntelliJ install the Lombok plugin and enable annotation processing -
-[learn more](https://bootify.io/next-steps/spring-boot-with-lombok.html).
-
-After starting the application it is accessible under `localhost:8080`.
-
-## Build
-
-The application can be built using the following command:
-
-```
-gradlew clean build
-```
-
-Start your application with the following command - here with the profile `production`:
-
-```
-java -Dspring.profiles.active=production -jar ./build/libs/Altair-0.0.1-SNAPSHOT.jar
-```
-
-If required, a Docker image can be created with the Spring Boot plugin. Add `SPRING_PROFILES_ACTIVE=production` as
-environment variable when running the container.
-
-```
-gradlew bootBuildImage --imageName=com.blankfactor/altair
-```

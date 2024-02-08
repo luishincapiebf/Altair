@@ -3,8 +3,6 @@ WORKDIR /home/gradle/src
 COPY . .
 RUN gradle bootJar
 
-# ------------------------------------------------------------------------------
-
 FROM openjdk:17
 WORKDIR /code
 COPY --from=BUILD /home/gradle/src/build/libs/*.jar app.jar

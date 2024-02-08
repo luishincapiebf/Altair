@@ -1,20 +1,15 @@
 package com.blankfactor.altair.url.rest;
 
 import com.blankfactor.altair.url.domain.Url;
-import com.blankfactor.altair.url.model.UrlDTO;
 import com.blankfactor.altair.url.service.UrlService;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 
 
 @RestController

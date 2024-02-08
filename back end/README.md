@@ -1,11 +1,11 @@
-# Altair - URL Shortener
+# Altair back end
 
 ## Development
 
 Update your local database connection in `application.yml` or create your own `application-local.yml` file to override
 settings for development.
 
-During development it is recommended to use the profile `local`. In IntelliJ `-Dspring.profiles.active=local` can be
+During development, it is recommended to use the profile `local`. In IntelliJ `-Dspring.profiles.active=local` can be
 added in the VM options of the Run Configuration after enabling this property in "Modify options".
 
 Lombok must be supported by your IDE. For IntelliJ install the Lombok plugin and enable annotation processing -

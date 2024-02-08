@@ -20,13 +20,7 @@ public class UrlDTO {
     @Size(max = 255)
     private String longUrl;
 
-    @NotNull
-    @Size(max = 255)
-    private String createdAt;
-
-    @NotNull
-    @Size(max = 255)
-    private String expiresAt;
+    private String qrCode;
 
     private Long user;
 
