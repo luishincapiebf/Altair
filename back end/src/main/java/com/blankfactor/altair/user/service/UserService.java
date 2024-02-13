@@ -1,14 +1,13 @@
 package com.blankfactor.altair.user.service;
 
+import java.util.List;
+
 import com.blankfactor.altair.user.domain.User;
 import com.blankfactor.altair.user.model.UserDTO;
 import com.blankfactor.altair.user.repos.UserRepository;
 import com.blankfactor.altair.util.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 
 @Service
 public class UserService {
@@ -21,9 +20,7 @@ public class UserService {
 
     public List<UserDTO> findAll() {
         final List<User> users = userRepository.findAll(Sort.by("id"));
-        return users.stream()
-                .map(user -> mapToDTO(user, new UserDTO()))
-                .toList();
+        return users.stream().map(user -> mapToDTO(user, new UserDTO())).toList();
     }
 
     public UserDTO get(final Long id) {
@@ -39,8 +36,7 @@ public class UserService {
     }
 
     public void update(final Long id, final UserDTO userDTO) {
-        final User user = userRepository.findById(id)
-                .orElseThrow(NotFoundException::new);
+        final User user = userRepository.findById(id).orElseThrow(NotFoundException::new);
         mapToEntity(userDTO, user);
         userRepository.save(user);
     }

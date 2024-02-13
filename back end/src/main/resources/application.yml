@@ -1,12 +1,12 @@
+host-url: http://localhost:8080
+
 spring:
   datasource:
-    url: ${JDBC_DATABASE_URL:jdbc:h2:mem:Altair}
+    url: ${JDBC_DATABASE_URL:jdbc:h2:mem:altair-db}
     username: ${JDBC_DATABASE_USERNAME:sa}
     password: ${JDBC_DATABASE_PASSWORD:}
     dbcp2:
-      max-wait-millis: 30000
       validation-query: select 1
-      validation-query-timeout: 30
   jpa:
     hibernate:
       ddl-auto: update
@@ -19,4 +19,4 @@ spring:
         id:
           new_generator_mappings: true
 springdoc:
-  pathsToMatch: /api/**
+  pathsToMatch: /**

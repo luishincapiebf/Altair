@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 public class UrlDTO {
@@ -20,8 +19,9 @@ public class UrlDTO {
     @Size(max = 255)
     private String longUrl;
 
+    private String createdAt;
+
+    private String expiresAt;
+
     private String qrCode;
-
-    private Long user;
-
 }

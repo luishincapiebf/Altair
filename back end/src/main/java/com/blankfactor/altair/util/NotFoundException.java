@@ -1,6 +1,5 @@
 package com.blankfactor.altair.util;
 
-
 public class NotFoundException extends RuntimeException {
 
     public NotFoundException() {

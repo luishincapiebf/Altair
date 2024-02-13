@@ -1,10 +1,11 @@
 package com.blankfactor.altair.config;
 
+import java.util.List;
+
 import com.blankfactor.altair.model.ErrorResponse;
 import com.blankfactor.altair.model.FieldError;
 import com.blankfactor.altair.util.NotFoundException;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
