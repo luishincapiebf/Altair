@@ -24,8 +24,8 @@ dependencies {
     implementation('com.google.guava:guava:32.0.0-android')
     implementation('org.mapstruct:mapstruct:1.5.5.Final')
     implementation('net.glxn:qrgen:1.4')
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    implementation ('org.springframework.boot:spring-boot-starter-actuator')
+    annotationProcessor ('org.mapstruct:mapstruct-processor:1.5.5.Final')
     runtimeOnly('com.h2database:h2')
     implementation('org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0')
     compileOnly('org.projectlombok:lombok')
