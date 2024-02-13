@@ -7,7 +7,6 @@ import com.blankfactor.altair.url.domain.Url;
 import com.blankfactor.altair.url.model.UrlDTO;
 import com.blankfactor.altair.url.service.UrlService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.java.Log;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
