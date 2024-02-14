@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.blankfactor.altair.url.domain.Url;
 import com.blankfactor.altair.url.mapper.UrlMapper;
@@ -74,21 +76,16 @@ public class UrlService {
     }
 
     private String generateQRCode(String url) {
-
         ByteArrayOutputStream outputStream = QRCode.from(url).withSize(250, 250).to(ImageType.PNG).stream();
-
         byte[] qrCodeBytes = outputStream.toByteArray();
-
         return Base64.getEncoder().encodeToString(qrCodeBytes);
     }
 
     public static String generateShortUrl(String originalUrl) {
         byte[] hash = Hashing.sha256().hashString(originalUrl, StandardCharsets.UTF_8).asBytes();
-        StringBuilder shortUrl = new StringBuilder();
-        for (int i = 0; i < 6; i++) {
-            int index = hash[i] & 0xFF;
-            shortUrl.append(ALLOWED_CHARS.get(index % ALLOWED_CHARS.size()));
-        }
-        return shortUrl.toString();
+        return IntStream.range(0, 7)
+                .map(i -> hash[i] & 0xFF)
+                .mapToObj(index -> String.valueOf(ALLOWED_CHARS.get(index % ALLOWED_CHARS.size())))
+                .collect(Collectors.joining());
     }
 }

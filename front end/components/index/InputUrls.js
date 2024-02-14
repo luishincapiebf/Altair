@@ -21,12 +21,12 @@ export default function InputUrls() {
             <section className="flex-col max-w-6xl mx-auto px-2 sm:px-6 mt-5 sm:pt-3">
                 <h2 className="text-2xl font-bold text-gray-800 my-2">URL shortener</h2>
                 <div className="flex items-center">
-                    <form className="flex flex-row space-y-3" onSubmit={(e) => handleSubmit(e)}>
-                        <label htmlFor="urlVal" className="flex flex-col text-gray-500 text-sm">
+                    <form className="flex flex-row items-baseline" onSubmit={(e) => handleSubmit(e)}>
+                        <label htmlFor="urlVal" className="flex flex-col gap-0.5 text-sm">
                             <input
                                 name={"urlVal"}
                                 type="url"
-                                className="w-72 md:w-96  xl:w-96 border border-gray-300 rounded-lg px-3 py-2 mr-2"
+                                className="w-72 md:w-96 xl:w-96 border border-gray-300 rounded-lg px-3 py-2 mr-2"
                                 title="Enter a valid URL"
                                 value={urlVal}
                                 onChange={(e) => handleChange(e)}

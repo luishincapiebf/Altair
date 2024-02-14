@@ -15,15 +15,15 @@ import org.springframework.beans.factory.annotation.Value;
 public interface UrlMapper {
 
     @Value("${host-url}")
-    String hostUrl = "http://localhost:8080";
+    String hostUrl = "http://192.168.10.93:8080";
 
-    @Mapping(target = "user", ignore = true)
+    //@Mapping(target = "user", ignore = true)
     Url toEntity(UrlDTO urlDTO);
 
-    @Mapping(target = "qrCode", ignore = true)
+    //@Mapping(target = "qrCode", ignore = true)
     UrlDTO toDto(Url url);
 
-    @Mapping(target = "user", ignore = true)
+    //@Mapping(target = "user", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Url partialUpdate(UrlDTO urlDTO,
                       @MappingTarget

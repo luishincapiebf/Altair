@@ -32,17 +32,22 @@ export default function ShortUrlCard({urlVal}) {
 
         <div>
             <h2 className="text-1xl font-semibold text-gray-800 my-2">Shortened URL</h2>
-            <h3 className="text-gray-500 text-sm">Created </h3>
-            <p className="text-gray-500 text-sm">{data.createdAt}</p>
-            <h3 className="text-gray-500 text-sm">Expires </h3>
-            <p className="text-gray-500 text-sm">{data.expiresAt}</p>
 
-            <h3 className="text-gray-500 text-sm">Clicks </h3>
-            <p className="text-gray-500 text-sm">{data.accessCount}</p>
-
-            <div className="flex gap-4">
+            <div className="flex items-center gap-1">
+                <h3 className="text-gray-500 text-sm">Created:</h3>
+                <p className="text-gray-500 text-sm">{data.createdAt}</p>
+            </div>
+            <div className="flex items-center gap-1">
+                <h3 className="text-gray-500 text-sm">Expires:</h3>
+                <p className="text-gray-500 text-sm">{data.expiresAt}</p>
+            </div>
+            <div className="flex items-center gap-1">
+                <h3 className="text-gray-500 text-sm">Clicks:</h3>
+                <p className="text-gray-500 text-sm">{data.accessCount}</p>
+            </div>
+            <div className="flex gap-4 items-baseline">
                 <Link href={data.shortUrl} passHref={true}>
-                    <p className="text-blue-800 mt-2">{data.shortUrl}</p>
+                    <p className="text-blue-800">{data.shortUrl}</p>
                 </Link>
                 <button onClick={handleCopyUrl}
                         className="bg-blue-800  hover:bg-blue-700 font-bold  text-white px-2 py-1 rounded-md">
