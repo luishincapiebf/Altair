@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Value;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UrlMapper {
 
-    @Value("${host-url}")
+    @Value("${app.host-url}")
     String hostUrl = "http://192.168.10.93:8080";
 
     //@Mapping(target = "user", ignore = true)
     Url toEntity(UrlDTO urlDTO);
 
-    //@Mapping(target = "qrCode", ignore = true)
+   // @Mapping(target = "qrCode", ignore = true)
     UrlDTO toDto(Url url);
 
     //@Mapping(target = "user", ignore = true)

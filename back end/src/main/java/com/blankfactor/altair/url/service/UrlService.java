@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UrlService {
 
-    @Value("${host-url}")
+    @Value("${app.host-url}")
     private String hostUrl = "http://localhost:8080";
 
     private final UrlRepository urlRepository;

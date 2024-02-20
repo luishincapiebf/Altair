@@ -1,6 +1,6 @@
-host-url: http://localhotst:8080
-
 spring:
+  application:
+    name: altair-api
   datasource:
     url: ${JDBC_DATABASE_URL:jdbc:h2:mem:altair-db}
     username: ${JDBC_DATABASE_USERNAME:sa}
@@ -20,3 +20,14 @@ spring:
           new_generator_mappings: true
 springdoc:
   pathsToMatch: /**
+
+app:
+  jwt:
+    # Signing key for HS512 algorithm
+    # In http://www.allkeysgenerator.com/ you can generate all kinds of keys
+    secret: v9y$B&E)H@MbQeThWmZq4t7w!z%C*F-JaNdRfUjXn2r5u8x/A?D(G+KbPeShVkYp
+    expiration:
+      minutes: 10
+  cors:
+    allowed-origins: http://localhost:3000
+  host-url: http://localhotst:8080

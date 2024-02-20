@@ -1,14 +1,24 @@
 package com.blankfactor.altair.user.rest;
 
-import java.util.List;
+import static com.blankfactor.altair.config.SwaggerConfig.BEARER_KEY_SECURITY_SCHEME;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.blankfactor.altair.security.CustomUserDetails;
+import com.blankfactor.altair.user.domain.User;
+import com.blankfactor.altair.user.domain.UserDto;
+import com.blankfactor.altair.user.mapper.UserMapper;
 import com.blankfactor.altair.user.model.UserDTO;
 import com.blankfactor.altair.user.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,51 +33,42 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserResource {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
-    public UserResource(final UserService userService) {
+    public UserResource(final UserService userService, final UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/me")
+    public UserDto getCurrentUser(
+            @AuthenticationPrincipal
+            CustomUserDetails currentUser) {
+        return userMapper.toDto(userService.validateAndGetUserByUsername(currentUser.getUsername()));
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        return ResponseEntity.ok(userService.findAll());
+    public List<UserDto> getUsers() {
+        return userService.getUsers().stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUser(
-            @PathVariable(name = "id")
-            final Long id) {
-        return ResponseEntity.ok(userService.get(id));
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/{username}")
+    public UserDto getUser(
+            @PathVariable
+            String username) {
+        return userMapper.toDto(userService.validateAndGetUserByUsername(username));
     }
 
-    @PostMapping
-    @ApiResponse(responseCode = "201")
-    public ResponseEntity<Long> createUser(
-            @RequestBody
-            @Valid
-            final UserDTO userDTO) {
-        final Long createdId = userService.create(userDTO);
-        return new ResponseEntity<>(createdId, HttpStatus.CREATED);
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @DeleteMapping("/{username}")
+    public UserDto deleteUser(
+            @PathVariable
+            String username) {
+        User user = userService.validateAndGetUserByUsername(username);
+        userService.deleteUser(user);
+        return userMapper.toDto(user);
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Long> updateUser(
-            @PathVariable(name = "id")
-            final Long id,
-            @RequestBody
-            @Valid
-            final UserDTO userDTO) {
-        userService.update(id, userDTO);
-        return ResponseEntity.ok(id);
-    }
-
-    @DeleteMapping("/{id}")
-    @ApiResponse(responseCode = "204")
-    public ResponseEntity<Void> deleteUser(
-            @PathVariable(name = "id")
-            final Long id) {
-        userService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
 }

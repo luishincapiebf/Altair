@@ -1,67 +1,23 @@
 package com.blankfactor.altair.user.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.blankfactor.altair.user.domain.User;
-import com.blankfactor.altair.user.model.UserDTO;
-import com.blankfactor.altair.user.repos.UserRepository;
-import com.blankfactor.altair.util.NotFoundException;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    private final UserRepository userRepository;
+    List<User> getUsers();
 
-    public UserService(final UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    Optional<User> getUserByUsername(String username);
 
-    public List<UserDTO> findAll() {
-        final List<User> users = userRepository.findAll(Sort.by("id"));
-        return users.stream().map(user -> mapToDTO(user, new UserDTO())).toList();
-    }
+    boolean hasUserWithUsername(String username);
 
-    public UserDTO get(final Long id) {
-        return userRepository.findById(id)
-                .map(user -> mapToDTO(user, new UserDTO()))
-                .orElseThrow(NotFoundException::new);
-    }
+    boolean hasUserWithEmail(String email);
 
-    public Long create(final UserDTO userDTO) {
-        final User user = new User();
-        mapToEntity(userDTO, user);
-        return userRepository.save(user).getId();
-    }
+    User validateAndGetUserByUsername(String username);
 
-    public void update(final Long id, final UserDTO userDTO) {
-        final User user = userRepository.findById(id).orElseThrow(NotFoundException::new);
-        mapToEntity(userDTO, user);
-        userRepository.save(user);
-    }
+    User saveUser(User user);
 
-    public void delete(final Long id) {
-        userRepository.deleteById(id);
-    }
-
-    private UserDTO mapToDTO(final User user, final UserDTO userDTO) {
-        userDTO.setId(user.getId());
-        userDTO.setName(user.getName());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setLastLogin(user.getLastLogin());
-        return userDTO;
-    }
-
-    private User mapToEntity(final UserDTO userDTO, final User user) {
-        user.setName(userDTO.getName());
-        user.setEmail(userDTO.getEmail());
-        user.setLastLogin(userDTO.getLastLogin());
-        return user;
-    }
-
-    public boolean emailExists(final String email) {
-        return userRepository.existsByEmailIgnoreCase(email);
-    }
-
+    void deleteUser(User user);
 }
