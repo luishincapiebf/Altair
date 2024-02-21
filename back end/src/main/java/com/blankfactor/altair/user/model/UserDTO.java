@@ -1,24 +1,12 @@
 package com.blankfactor.altair.user.model;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import java.io.Serializable;
 
-@Getter
-@Setter
-public class UserDTO {
+import com.blankfactor.altair.user.domain.User;
 
-    private Long id;
-
-    @Size(max = 255)
-    private String name;
-
-    @NotNull
-    @Size(max = 255)
-    private String email;
-
-    @Size(max = 255)
-    private String lastLogin;
-
+/**
+ * DTO for {@link User}
+ */
+public record UserDTO(Long id, String name, String email, String lastLogin, String password, String role,
+                      String username) implements Serializable {
 }

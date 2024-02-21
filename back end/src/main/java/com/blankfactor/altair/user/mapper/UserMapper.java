@@ -1,7 +1,7 @@
 package com.blankfactor.altair.user.mapper;
 
 import com.blankfactor.altair.user.domain.User;
-import com.blankfactor.altair.user.domain.UserDto;
+import com.blankfactor.altair.user.model.UserDTO;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -11,12 +11,12 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
-    User toEntity(UserDto userDto);
+    User toEntity(UserDTO userDto);
 
-    UserDto toDto(User user);
+    UserDTO toDto(User user);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    User partialUpdate(UserDto userDto,
+    User partialUpdate(UserDTO userDto,
                        @MappingTarget
                        User user);
 }
